@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+    <title>CAVE2 voice control</title>
+
+    <script src="https://cdn.socket.io/socket.io-1.4.3.js"></script>
+    <script type="text/javascript" src="lib/artyom/artyom.window.js"></script>
+
+  </head>
+
+  <body>
+    <h1>Test with artyom.js</h1>
+
+    <p>Recognition text: <span id="span-preview"></span></p>
+    <p>Command: <input type="text" name="commandstr" id="commandstr"></p>
+    <p><button type="button" id="simulate" onclick="onSimulateClick()">Simulate</button></p>
+
+    <script type="text/javascript" src="src/main.js"></script>
+    <script>
+      function onSimulateClick() {
+        console.log('onSimulateClick: ' + window.artyom.isObeying());
+        var str = document.getElementById("commandstr").value;
+        console.log(str);
+        window.artyom.simulateInstruction(str);
+      }
+    </script>
+  </body>
+</html>
