@@ -7,13 +7,19 @@ window.onload = function() {
   // or add some commandsDemostrations in the normal way
   artyom.addCommands([
       {
-          indexes: ['Hello','Hi','is someone there'],
+          indexes: ['hello','hi','is someone there'],
           action: (i) => {
               artyom.say("Hello, it's me");
           }
       },
       {
-          indexes: ['Repeat after me *'],
+          indexes: ['omega run connectome','omega stop', 'start program'],
+          action: (i) => {
+              artyom.say("Omegalib is starting now");
+          }
+      },
+      {
+          indexes: ['repeat after me *'],
           smart:true,
           action: (i,wildcard) => {
               artyom.say("You've said : "+ wildcard);
@@ -42,13 +48,13 @@ window.onload = function() {
       continuous: true, // Listen forever
       soundex: true,// Use the soundex algorithm to increase accuracy
       debug: true, // Show messages in the console
-      executionKeyword: "and do it now",
+      executionKeyword: "now",
       listen: true, // Start to listen commands !
       obeyKeyword: "listen again",
 
       // If providen, you can only trigger a command if you say its name
       // e.g to trigger Good Morning, you need to say "Jarvis Good Morning"
-      name: "run"
+      name: "ok"
   }).then(() => {
       console.log("Artyom has been succesfully initialized");
   }).catch((err) => {
@@ -58,7 +64,7 @@ window.onload = function() {
   artyom.redirectRecognizedTextOutput((recognized,isFinal) => {
     console.log('redirectRecognizedTextOutput:' + recognized + ' ' + isFinal);
     if(isFinal){
-      document.getElementById("span-preview").textContent = "stopped";
+      document.getElementById("span-final").textContent = recognized;
     }else{
       document.getElementById("span-preview").textContent = recognized;
     }

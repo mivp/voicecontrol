@@ -16,11 +16,13 @@ CAVE2_speech.init = function () {
   console.log("SpeechRecognition> API exists, beginning setup");
   this.webkitSR = new webkitSpeechRecognition();
   this.webkitSR.continuous = true;
-	this.webkitSR.interimResults = true
+	this.webkitSR.interimResults = false;
+  this.webkitSR.lang = 'en-US';
+  //this.webkitSR.maxAlternatives = 0;
   console.log(this.webkitSR);
 
   // Give weight to the system name
-	var grammar = '#JSGF V1.0; grammar noun; public <noun> = ' + 'Cave' + ' ;';
+	var grammar = '#JSGF V1.0; grammar noun; public <noun> = cave | omegalib ;';
 	if (webkitSpeechGrammarList) {
 		var speechRecognitionList = this.webkitSR.grammars;
 		// 0->1 weight of grammar likely to happen compared to others.
@@ -43,7 +45,7 @@ CAVE2_speech.init = function () {
     var interim_transcript = '';
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
-        CAVE2_speech.final_transcript += event.results[i][0].transcript;
+        CAVE2_speech.final_transcript = event.results[i][0].transcript;
         document.getElementById("span-final_transcript").textContent = CAVE2_speech.final_transcript +
                                                           '(' + event.results[i][0].confidence + ')';
         // do something with the final script here
@@ -63,7 +65,8 @@ CAVE2_speech.init = function () {
   // After ending restart
 	this.webkitSR.onend = function() {
     console.log("SpeechRecognition> webkitSpeechRecognition ended");
-		this.recognizing = false;
+		//this.recognizing = false;
+    CAVE2_speech.webkitSR.start();
 	};
 
 } // init
