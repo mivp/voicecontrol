@@ -21,5 +21,25 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 //server.listen(process.env.PORT || config.port, process.env.IP || "0.0.0.0", function(){
 server.listen(process.env.PORT || config.port, process.env.IP || "127.0.0.1", function(){
 	var addr = server.address();
-  console.log("server listening at", addr.address + ":" + addr.port);
+  	console.log("server listening at", addr.address + ":" + addr.port);
+});
+
+// ===== SOCKET IO ===========
+io.on('connection', function (socket) {
+	console.log("A client connected!");
+
+	socket.on('disconnect', function(){
+    	console.log('user disconnected');
+  	});
+
+	socket.on('message', function(data) {
+		console.log(data);
+		// run any command here
+		if(data.command == 'sayHello') {
+			console.log('Run command on server: Hello!');
+		}
+		else if(data.command == 'runProgram') {
+			console.log('Run command on server: run a program!');
+		}
+	});
 });

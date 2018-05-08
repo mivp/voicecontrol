@@ -1,5 +1,7 @@
 window.onload = function() {
 
+  var socket = io();
+
   // Create a variable that stores your instance
   window.artyom = new Artyom();
   artyom = window.artyom;
@@ -10,12 +12,14 @@ window.onload = function() {
           indexes: ['hello','hi','is someone there'],
           action: (i) => {
               artyom.say("Hello, it's me");
+              socket.emit('message', {command: 'sayHello', args: 'none'});
           }
       },
       {
           indexes: ['omega run connectome','omega stop', 'start program'],
           action: (i) => {
               artyom.say("Omegalib is starting now");
+              socket.emit('message', {command: 'runProgram', args: 'abc'});
           }
       },
       {
@@ -54,7 +58,7 @@ window.onload = function() {
 
       // If providen, you can only trigger a command if you say its name
       // e.g to trigger Good Morning, you need to say "Jarvis Good Morning"
-      name: "ok"
+      name: "CAVE"
   }).then(() => {
       console.log("Artyom has been succesfully initialized");
   }).catch((err) => {
