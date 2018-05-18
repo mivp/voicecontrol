@@ -6,27 +6,70 @@ window.onload = function() {
   window.artyom = new Artyom();
   artyom = window.artyom;
 
+
+
   // or add some commandsDemostrations in the normal way
   artyom.addCommands([
       {
-          indexes: ['hello','hi','is someone there'],
+          indexes: ['hello','hi'],
           action: (i) => {
-              artyom.say("Hello, it's me");
+              artyom.say("Hello, it's me, cave");
               socket.emit('message', {command: 'sayHello', args: 'none'});
           }
       },
       {
-          indexes: ['omega run connectome','omega stop', 'start program'],
+          indexes: ['run brain', "start brain", "start connectome", "run connectome"],
           action: (i) => {
-              artyom.say("Omegalib is starting now");
-              socket.emit('message', {command: 'runProgram', args: 'abc'});
+              artyom.say("Starting Connectome");
+              socket.emit('message', {command: 'runProgram_Connectome', args: 'abc'});
           }
       },
       {
-          indexes: ['repeat after me *'],
-          smart:true,
-          action: (i,wildcard) => {
-              artyom.say("You've said : "+ wildcard);
+          indexes: ['run rabbit', "start rabbit"],
+          action: (i) => {
+              artyom.say("Starting Rabbit demo");
+               socket.emit('message', {command: 'runProgram_Rabbit', args: 'abc'});          }
+      },
+      {
+          indexes: ["run mars", "start mars" ],
+          action: (i) => {
+              artyom.say("Starting Mars");
+               socket.emit('message', {command: 'runProgram_Mars', args: 'abc'});
+          }
+      },
+       {
+          indexes: ["screens on", "displays on", "turn on"],
+          action: (i) => {
+              artyom.say("Turning displays on");
+               socket.emit('message', {command: 'displaysOn', args: 'abc'});
+          }
+      },
+       {
+          indexes: ["screens off", "displays on", "turn off"],
+          action: (i) => {
+              artyom.say("Turning displays off");
+               socket.emit('message', {command: 'displaysOff', args: 'abc'});
+          }
+      },
+       {
+          indexes: ['stop'],
+          action: (i) => {
+              artyom.say("Stopping application.");
+               socket.emit('message', {command: 'stopApp', args: 'abc'});
+          }
+      },
+       {
+          indexes: ['sound off', "audio off"],
+          action: (i) => {
+              artyom.say("Turning sound off.");
+               socket.emit('message', {command: 'soundOff', args: 'abc'});
+          }
+      },
+       {
+          indexes: ['sound on', "audio on"],
+          action: (i) => {
+              artyom.say("Turning sound on");
+               socket.emit('message', {command: 'soundOn', args: 'abc'});
           }
       },
       // The smart commands support regular expressions
@@ -54,11 +97,11 @@ window.onload = function() {
       debug: true, // Show messages in the console
       executionKeyword: "now",
       listen: true, // Start to listen commands !
-      obeyKeyword: "listen again",
-
+      obeyKeyword: "listen cave",
+     // executionKeyword: "command over", //command will execute even if talker keeps talking
       // If providen, you can only trigger a command if you say its name
-      // e.g to trigger Good Morning, you need to say "Jarvis Good Morning"
-      name: "CAVE"
+      // e.g to trigger Good Morning, you need to say "listen cave Good Morning"
+      name: "listen cave"
   }).then(() => {
       console.log("Artyom has been succesfully initialized");
   }).catch((err) => {
@@ -93,7 +136,13 @@ window.onload = function() {
           alert("An error ocurred, it seems the access to your microphone is denied");
       }
 
+
+      
       console.log(error.message);
   });
+
+ // artyom.when("NOT_COMMAND_MATCHED",function(){
+ //   artyom.say("Sorry, I do not know that command.");
+//});
 
 } // on load
