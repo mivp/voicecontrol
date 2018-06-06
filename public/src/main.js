@@ -55,7 +55,7 @@ window.onload = function() {
           indexes: ['stop'],
           action: (i) => {
               artyom.say("Stopping application.");
-               socket.emit('message', {command: 'stopApp', args: 'abc'});
+               socket.emit('message', {command: 'stopApp', args: 'stop.sh'});
           }
       },
        {
@@ -97,11 +97,11 @@ window.onload = function() {
       debug: true, // Show messages in the console
       executionKeyword: "now",
       listen: true, // Start to listen commands !
-      obeyKeyword: "listen cave",
+      obeyKeyword: "listen",
      // executionKeyword: "command over", //command will execute even if talker keeps talking
       // If providen, you can only trigger a command if you say its name
       // e.g to trigger Good Morning, you need to say "listen cave Good Morning"
-      name: "listen cave"
+      name: "listen"
   }).then(() => {
       console.log("Artyom has been succesfully initialized");
   }).catch((err) => {
