@@ -1,6 +1,7 @@
 window.onload = function() {
 
   var socket = io();
+  var audio = new Audio('../pling.mp3');
 
   // Create a variable that stores your instance
   window.artyom = new Artyom();
@@ -13,65 +14,78 @@ window.onload = function() {
       {
           indexes: ['hello','hi'],
           action: (i) => {
-              artyom.say("Hello, it's me, cave");
+              //artyom.say("Hello, it's me, cave");
               socket.emit('message', {command: 'sayHello', args: 'none'});
           }
       },
+
+      /*start demos 
+        Use easily distinguishable commands for each demo. Add common misses to the indexes (e.g. praying for brain), to build
+        a reliable application
+
+      */
       {
-          indexes: ['run brain', "start brain", "start connectome", "run connectome"],
+          indexes: ['run brain', "start brain", "start connectome", "run connectome", "start praying", "run praying"],
           action: (i) => {
-              artyom.say("Starting Connectome");
-              socket.emit('message', {command: 'runProgram_Connectome', args: 'abc'});
+            audio.play();
+              socket.emit('message', {command: 'runProgram', args: 'connectome'});
           }
       },
       {
           indexes: ['run rabbit', "start rabbit"],
           action: (i) => {
-              artyom.say("Starting Rabbit demo");
-               socket.emit('message', {command: 'runProgram_Rabbit', args: 'abc'});          }
+ audio.play();
+               socket.emit('message', {command: 'runProgram', args: 'rabbit'});          }
       },
       {
-          indexes: ["run mars", "start mars" ],
+          indexes: ["run mars", "start mars", "run mass", "start mass", "run planet", "start planet" ],
           action: (i) => {
-              artyom.say("Starting Mars");
-               socket.emit('message', {command: 'runProgram_Mars', args: 'abc'});
+     audio.play();
+               socket.emit('message', {command: 'runProgram', args: 'mars'});
           }
       },
+
+      /* Screens */
        {
           indexes: ["screens on", "displays on", "turn on"],
           action: (i) => {
-              artyom.say("Turning displays on");
-               socket.emit('message', {command: 'displaysOn', args: 'abc'});
+                    audio.play();
+                   socket.emit('message', {command: 'displaysOn', args: ''});
           }
       },
        {
-          indexes: ["screens off", "displays on", "turn off"],
+          indexes: ["screens off", "displays off", "turn off"],
           action: (i) => {
-              artyom.say("Turning displays off");
-               socket.emit('message', {command: 'displaysOff', args: 'abc'});
+ audio.play();
+               socket.emit('message', {command: 'displaysOff', args: ''});
           }
       },
+
+      /* Stop running demo */
        {
           indexes: ['stop'],
           action: (i) => {
-              artyom.say("Stopping application.");
+             audio.play();
                socket.emit('message', {command: 'stopApp', args: 'stop.sh'});
           }
       },
+
+      /* Sound controls */
        {
           indexes: ['sound off', "audio off"],
           action: (i) => {
-              artyom.say("Turning sound off.");
-               socket.emit('message', {command: 'soundOff', args: 'abc'});
+             audio.play();
+               socket.emit('message', {command: 'soundOff', args: ''});
           }
       },
        {
           indexes: ['sound on', "audio on"],
           action: (i) => {
-              artyom.say("Turning sound on");
-               socket.emit('message', {command: 'soundOn', args: 'abc'});
+             audio.play();
+               socket.emit('message', {command: 'soundOn', args: ''});
           }
       },
+      /*
       // The smart commands support regular expressions
       {
           indexes: [/Good Morning/i],
@@ -79,7 +93,9 @@ window.onload = function() {
           action: (i,wildcard) => {
               artyom.say("You've said : "+ wildcard);
           }
-      },
+      }, */
+
+      /* Stop voice recognition */
       {
           indexes: ['shut down yourself'],
           action: (i,wildcard) => {
@@ -95,13 +111,12 @@ window.onload = function() {
       continuous: true, // Listen forever
       soundex: true,// Use the soundex algorithm to increase accuracy
       debug: true, // Show messages in the console
-      executionKeyword: "now",
+    //  executionKeyword: "now",
       listen: true, // Start to listen commands !
-      obeyKeyword: "listen",
+    //  obeyKeyword: "listen",
      // executionKeyword: "command over", //command will execute even if talker keeps talking
       // If providen, you can only trigger a command if you say its name
-      // e.g to trigger Good Morning, you need to say "listen cave Good Morning"
-      name: "listen"
+   //   name: "listen"
   }).then(() => {
       console.log("Artyom has been succesfully initialized");
   }).catch((err) => {
