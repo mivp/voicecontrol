@@ -38,7 +38,7 @@ window.onload = function() {
                socket.emit('message', {command: 'runProgram', args: 'rabbit'});          }
       },
       {
-          indexes: ["run mars", "start mars", "run mass", "start mass", "run planet", "start planet" ],
+          indexes: ["run mars", "start mars", "run mass", "start mass", "run mask", "start mask", "run planet", "start planet" ],
           action: (i) => {
      audio.play();
                socket.emit('message', {command: 'runProgram', args: 'mars'});
@@ -47,16 +47,16 @@ window.onload = function() {
 
       /* Screens */
        {
-          indexes: ["screens on", "displays on", "turn on"],
+          indexes: ["screens on", "displays on", "turn on", "screams on"],
           action: (i) => {
                     audio.play();
                    socket.emit('message', {command: 'displaysOn', args: ''});
           }
       },
        {
-          indexes: ["screens off", "displays off", "turn off"],
+          indexes: ["screens off", "displays off", "turn off", "screams off"],
           action: (i) => {
- audio.play();
+                audio.play();
                socket.emit('message', {command: 'displaysOff', args: ''});
           }
       },
@@ -113,6 +113,7 @@ window.onload = function() {
       debug: true, // Show messages in the console
     //  executionKeyword: "now",
       listen: true, // Start to listen commands !
+      speed:0.9, //speak a little slower
     //  obeyKeyword: "listen",
      // executionKeyword: "command over", //command will execute even if talker keeps talking
       // If providen, you can only trigger a command if you say its name
