@@ -1,11 +1,13 @@
+window.artyom = new Artyom();
+  artyom = window.artyom;
+
 window.onload = function() {
 
   var socket = io();
   var audio = new Audio('../pling.mp3');
 
   // Create a variable that stores your instance
-  window.artyom = new Artyom();
-  artyom = window.artyom;
+  
 
 
 
@@ -123,7 +125,10 @@ window.onload = function() {
   }).catch((err) => {
       console.error("Artyom couldn't be initialized: ", err);
   });
-
+console.log(window.location.pathname);
+if(window.location.pathname === "/src/buttonactivate.html") {
+ artyom.dontObey();
+}
   artyom.redirectRecognizedTextOutput((recognized,isFinal) => {
     console.log('redirectRecognizedTextOutput:' + recognized + ' ' + isFinal);
     if(isFinal){
@@ -133,9 +138,6 @@ window.onload = function() {
     }
   });
 
-  function simulateInstruction(command) {
-
-  }
 
   //All catchable artyom errors will be catched with this
   artyom.when("ERROR",function(error){
@@ -162,3 +164,14 @@ window.onload = function() {
 //});
 
 } // on load
+  function startrecord() {
+    console.log("start");
+    artyom.obey();
+    document.getElementById("recordbutton").value = "Listening . . .";
+  }
+
+  function stoprecord() {
+    console.log("stop");
+    artyom.dontObey();
+     document.getElementById("recordbutton").value = "Start Voice Recognition";
+  }

@@ -7,25 +7,14 @@
 
     <script src="https://cdn.socket.io/socket.io-1.4.3.js"></script>
     <script type="text/javascript" src="lib/artyom/artyom.window.js"></script>
-
+     <link rel="stylesheet" href="src/css/style.css">
   </head>
 
   <body>
-    <h1>Test with artyom.js</h1>
-
-    <p>Recognition text: <span id="span-preview"></span></p>
-    <p>Final text: <span id="span-final"></span></p>
-    <p>Command: <input type="text" name="commandstr" id="commandstr"></p>
-    <p><button type="button" id="simulate" onclick="onSimulateClick()">Simulate</button></p>
-
-    <script type="text/javascript" src="src/main.js"></script>
-    <script>
-      function onSimulateClick() {
-        console.log('onSimulateClick: ' + window.artyom.isObeying());
-        var str = document.getElementById("commandstr").value;
-        console.log(str);
-        window.artyom.simulateInstruction(str);
-      }
-    </script>
+    <h1>Choose how you want voice recognition to operate</h1>
+    <div id="buttoncontainer">
+    <a href="src/alwayslisten.html" class="button">Always listen</a>
+    <a href="src/buttonactivate.html" class="button">Button control</a>
+    </div>
   </body>
 </html>
