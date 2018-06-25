@@ -167,11 +167,11 @@ if(window.location.pathname === "/src/buttonactivate.html") {
   function startrecord() {
     console.log("start");
     artyom.obey();
-    document.getElementById("recordbutton").value = "Listening . . .";
+    document.getElementById("debugspan").innerHTML = "Listening . . .";
   }
 
   function stoprecord() {
     console.log("stop");
     artyom.dontObey();
-     document.getElementById("recordbutton").value = "Start Voice Recognition";
+     document.getElementById("debugspan").innerHTML = "Not Listening";
   }

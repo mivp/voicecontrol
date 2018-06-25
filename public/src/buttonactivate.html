@@ -16,8 +16,8 @@
     <p>Recognition text: <span id="span-preview"></span></p>
     <p>Final text: <span id="span-final"></span></p>
     <p>Command: <input type="text" name="commandstr" id="commandstr"></p>
-    <button id="recordbutton" class="button" type="button" onmousedown="startrecord()" onmouseup ="stoprecord()"> Start Voice Recognition</button>
-
+    <button id="recordbutton" class="button" type="button" ontouchstart="startrecord()" ontouchend="stoprecord()" onmousedown="startrecord()" onmouseup ="stoprecord()"> Start Voice Recognition</button>
+   <p>  <span id="debugspan"> Not Listening... </span></p>
     <script type="text/javascript" src="main.js"></script>
    
   </body>
